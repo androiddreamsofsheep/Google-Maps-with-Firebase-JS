@@ -15,14 +15,15 @@
         var map;
         
       function initMap() {
+          console.log("initmap");
         var uluru = {lat: -25.363, lng: 131.044};
         map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: uluru
+        zoom: 4,
+        center: uluru
         });
         var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
+        position: uluru,
+        map: map
         });
           
           initFirebase();
@@ -43,9 +44,10 @@
         firebase.initializeApp(config);
         
         
-        var firebase = new Firebase('https://fire-map-tutorial.firebaseio.com/');
+        var firebase = new Firebase('https://maps-7bdbb.firebaseio.com/');
 
         function initFirebase() {
+            console.log("firebase");
 
             // Reference to the clicks in Firebase.
             var locations = firebase.child('location');
@@ -53,6 +55,8 @@
             // Listener for when a click is added.
             locations.on('child_added',
               function(snapshot) {
+                
+                console.log("child_added");
 
                 // Get that click from firebase.
                 var newPosition = snapshot.val();
@@ -68,19 +72,7 @@
 
               }
             );
-
-            // Remove old data from the heatmap when a point is removed from firebase.
-            clicks.on('child_removed', function(snapshot, prevChildKey) {
-              var heatmapData = heatmap.getData();
-              var i = 0;
-              while (snapshot.val().lat != heatmapData.getAt(i).lat()
-                || snapshot.val().lng != heatmapData.getAt(i).lng()) {
-                i++;
-              }
-              heatmapData.removeAt(i);
-            });
           }
-
         
     </script>
       
