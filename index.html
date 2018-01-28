@@ -12,9 +12,11 @@
     <h3>My Google Maps Demo</h3>
     <div id="map"></div>
     <script>
+        var map;
+        
       function initMap() {
         var uluru = {lat: -25.363, lng: 131.044};
-        var map = new google.maps.Map(document.getElementById('map'), {
+        map = new google.maps.Map(document.getElementById('map'), {
           zoom: 4,
           center: uluru
         });
@@ -22,8 +24,66 @@
           position: uluru,
           map: map
         });
+          
+          initFirebase();
       }
     </script>
+      
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+        apiKey: "AIzaSyAS-fSMMKUHu4fmQEZkw03B-7UN0WKL8Bo",
+        authDomain: "maps-7bdbb.firebaseapp.com",
+        databaseURL: "https://maps-7bdbb.firebaseio.com",
+        projectId: "maps-7bdbb",
+        storageBucket: "maps-7bdbb.appspot.com",
+        messagingSenderId: "887386461425"
+        };
+        firebase.initializeApp(config);
+        
+        
+        var firebase = new Firebase('https://fire-map-tutorial.firebaseio.com/');
+
+        function initFirebase() {
+
+            // Reference to the clicks in Firebase.
+            var locations = firebase.child('location');
+
+            // Listener for when a click is added.
+            locations.on('child_added',
+              function(snapshot) {
+
+                // Get that click from firebase.
+                var newPosition = snapshot.val();
+//                var point = new google.maps.LatLng(newPosition.lat, newPosition.lng);
+                
+                new google.maps.Marker({
+                  position: newPosition,
+                  map: map
+                });
+
+                // Add the point to  the heatmap.
+//                heatmap.getData().push(point);
+
+              }
+            );
+
+            // Remove old data from the heatmap when a point is removed from firebase.
+            clicks.on('child_removed', function(snapshot, prevChildKey) {
+              var heatmapData = heatmap.getData();
+              var i = 0;
+              while (snapshot.val().lat != heatmapData.getAt(i).lat()
+                || snapshot.val().lng != heatmapData.getAt(i).lng()) {
+                i++;
+              }
+              heatmapData.removeAt(i);
+            });
+          }
+
+        
+    </script>
+      
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6nzeDN8TjiL_ZNsRsuk8wIsPIOlZDioE&callback=initMap">
     </script>
