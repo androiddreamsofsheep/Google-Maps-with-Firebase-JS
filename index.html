@@ -33,20 +33,22 @@
     
     <script>
         // Initialize Firebase
-        var config = {
-        apiKey: "AIzaSyAS-fSMMKUHu4fmQEZkw03B-7UN0WKL8Bo",
-        authDomain: "maps-7bdbb.firebaseapp.com",
-        databaseURL: "https://maps-7bdbb.firebaseio.com",
-        projectId: "maps-7bdbb",
-        storageBucket: "maps-7bdbb.appspot.com",
-        messagingSenderId: "887386461425"
-        };
-        firebase.initializeApp(config);
         
-        
-        var firebase = new Firebase('https://maps-7bdbb.firebaseio.com/');
 
         function initFirebase() {
+            var config = {
+                apiKey: "AIzaSyAS-fSMMKUHu4fmQEZkw03B-7UN0WKL8Bo",
+                authDomain: "maps-7bdbb.firebaseapp.com",
+                databaseURL: "https://maps-7bdbb.firebaseio.com",
+                projectId: "maps-7bdbb",
+                storageBucket: "maps-7bdbb.appspot.com",
+                messagingSenderId: "887386461425"
+                };
+            
+            firebase.initializeApp(config);
+
+            var firebase = new Firebase('https://maps-7bdbb.firebaseio.com/');
+            
             console.log("firebase");
 
             // Reference to the clicks in Firebase.
