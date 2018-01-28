@@ -26,15 +26,12 @@
         map: map
         });
           
-          initFirebase();
       }
     </script>
       
     
     <script>
         // Initialize Firebase
-        
-
         function initFirebase() {
             var config = {
                 apiKey: "AIzaSyAS-fSMMKUHu4fmQEZkw03B-7UN0WKL8Bo",
@@ -82,6 +79,6 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6nzeDN8TjiL_ZNsRsuk8wIsPIOlZDioE&callback=initMap">
     </script>
       
-    <script async defer src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+    <script async defer src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js&callback=initFirebase"></script>
   </body>
 </html>
