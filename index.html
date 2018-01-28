@@ -47,12 +47,12 @@
             
             firebase.initializeApp(config);
 
-            var firebase = new Firebase('https://maps-7bdbb.firebaseio.com/');
+            var ref = firebase.database().ref();
             
             console.log("firebase");
 
             // Reference to the clicks in Firebase.
-            var locations = firebase.child('location');
+            var locations = ref.child('location');
 
             // Listener for when a click is added.
             locations.on('child_added',
