@@ -7,6 +7,12 @@
         width: 100%;
        }
     </style>
+      
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6nzeDN8TjiL_ZNsRsuk8wIsPIOlZDioE&callback=initMap">
+        </script>
+      
+    <script async defer         src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js&callback=initFirebase"></script>
   </head>
   <body>
     <h3>My Google Maps Demo</h3>
@@ -33,19 +39,23 @@
     <script>
         // Initialize Firebase
         function initFirebase() {
-            var config = {
-                apiKey: "AIzaSyAS-fSMMKUHu4fmQEZkw03B-7UN0WKL8Bo",
-                authDomain: "maps-7bdbb.firebaseapp.com",
-                databaseURL: "https://maps-7bdbb.firebaseio.com",
-                projectId: "maps-7bdbb",
-                storageBucket: "maps-7bdbb.appspot.com",
-                messagingSenderId: "887386461425"
-                };
-            
+            if (!firebase.apps.length) {
+                var config = {
+                    apiKey: "AIzaSyAS-fSMMKUHu4fmQEZkw03B-7UN0WKL8Bo",
+                    authDomain: "maps-7bdbb.firebaseapp.com",
+                    databaseURL: "https://maps-7bdbb.firebaseio.com",
+                    projectId: "maps-7bdbb",
+                    storageBucket: "maps-7bdbb.appspot.com",
+                    messagingSenderId: "887386461425"
+                    };
+                firebase.initializeApp({});
+                
+            }
+
             firebase.initializeApp(config);
 
             var ref = firebase.database().ref();
-            
+
             console.log("firebase");
 
             // Reference to the clicks in Firebase.
@@ -54,13 +64,13 @@
             // Listener for when a click is added.
             locations.on('child_added',
               function(snapshot) {
-                
+
                 console.log("child_added");
 
                 // Get that click from firebase.
                 var newPosition = snapshot.val();
 //                var point = new google.maps.LatLng(newPosition.lat, newPosition.lng);
-                
+
                 new google.maps.Marker({
                   position: newPosition,
                   map: map
@@ -71,14 +81,12 @@
 
               }
             );
+            
+                
           }
         
     </script>
       
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6nzeDN8TjiL_ZNsRsuk8wIsPIOlZDioE&callback=initMap">
-    </script>
-      
-    <script async defer src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js&callback=initFirebase"></script>
+    
   </body>
 </html>
