@@ -12,7 +12,7 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6nzeDN8TjiL_ZNsRsuk8wIsPIOlZDioE&callback=initMap">
         </script>
       
-    <script async defer         src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js&callback=initFirebase"></script>
+    <script async defer         src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
   </head>
   <body>
     <h3>My Google Maps Demo</h3>
@@ -71,7 +71,7 @@
                 var newPosition = snapshot.val();
 //                var point = new google.maps.LatLng(newPosition.lat, newPosition.lng);
 
-                new google.maps.Marker({
+                new google.maps.Marker
                   position: newPosition,
                   map: map
                 });
