@@ -40,47 +40,49 @@
 
         // Initialize Firebase
         $(document).load(
-            function initFirebase() {
-                if (!firebase.apps.length) {
-                    var config = {
-                        apiKey: "AIzaSyAS-fSMMKUHu4fmQEZkw03B-7UN0WKL8Bo",
-                        authDomain: "maps-7bdbb.firebaseapp.com",
-                        databaseURL: "https://maps-7bdbb.firebaseio.com",
-                        projectId: "maps-7bdbb",
-                        storageBucket: "maps-7bdbb.appspot.com",
-                        messagingSenderId: "887386461425"
-                    };
-                    firebase.initializeApp({});
+            initFirebase();
+        );
 
-                }
-
-                firebase.initializeApp(config);
-
-                var ref = firebase.database().ref();
-
-                console.log("firebase");
-
-                // Reference to the clicks in Firebase.
-                var locations = ref.child('location');
-
-                // Listener for when a click is added.
-                locations.on('child_added',
-                    function(snapshot) {
-
-                        console.log("child_added");
-
-                        // Get that click from firebase.
-                        var newPosition = snapshot.val();
-
-                        var marker = new google.maps.Marker({
-                            position: newPosition,
-                            map: map
-                        });
-                    }
-                );
+        function initFirebase() {
+            if (!firebase.apps.length) {
+                var config = {
+                    apiKey: "AIzaSyAS-fSMMKUHu4fmQEZkw03B-7UN0WKL8Bo",
+                    authDomain: "maps-7bdbb.firebaseapp.com",
+                    databaseURL: "https://maps-7bdbb.firebaseio.com",
+                    projectId: "maps-7bdbb",
+                    storageBucket: "maps-7bdbb.appspot.com",
+                    messagingSenderId: "887386461425"
+                };
+                firebase.initializeApp({});
 
             }
-        );
+
+            firebase.initializeApp(config);
+
+            var ref = firebase.database().ref();
+
+            console.log("firebase");
+
+            // Reference to the clicks in Firebase.
+            var locations = ref.child('location');
+
+            // Listener for when a click is added.
+            locations.on('child_added',
+                function(snapshot) {
+
+                    console.log("child_added");
+
+                    // Get that click from firebase.
+                    var newPosition = snapshot.val();
+
+                    var marker = new google.maps.Marker({
+                        position: newPosition,
+                        map: map
+                    });
+                }
+            );
+
+        }
 
     </script>
 
