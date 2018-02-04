@@ -1,55 +1,62 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <style>
-       #map {
-        height: 400px;
-        width: 100%;
-       }
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+
     </style>
-      
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6nzeDN8TjiL_ZNsRsuk8wIsPIOlZDioE&callback=initMap">
-        </script>
-      
-    <script async defer         src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
-  </head>
-  <body>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6nzeDN8TjiL_ZNsRsuk8wIsPIOlZDioE&callback=initMap">
+
+
+    </script>
+
+    <script async defer src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+</head>
+
+<body>
     <h3>My Google Maps Demo</h3>
     <div id="map"></div>
     <script>
         var map;
-        
-      function initMap() {
-          console.log("initmap");
-        var uluru = {lat: -25.363, lng: 131.044};
-        map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 4,
-        center: uluru
-        });
-        var marker = new google.maps.Marker({
-        position: uluru,
-        map: map
-        });
-          
-      }
+
+        function initMap() {
+            console.log("initmap");
+            var uluru = {
+                lat: -25.363,
+                lng: 131.044
+            };
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 4,
+                center: uluru
+            });
+            var marker = new google.maps.Marker({
+                position: uluru,
+                map: map
+            });
+
+        }
+
     </script>
-      
-    
+
     <script>
         // Initialize Firebase
         function initFirebase() {
             if (!firebase.apps.length) {
                 var config = {
-                    apiKey: "AIzaSyC6nzeDN8TjiL_ZNsRsuk8wIsPIOlZDioE",
+                    apiKey: "AIzaSyAS-fSMMKUHu4fmQEZkw03B-7UN0WKL8Bo",
                     authDomain: "maps-7bdbb.firebaseapp.com",
                     databaseURL: "https://maps-7bdbb.firebaseio.com",
                     projectId: "maps-7bdbb",
                     storageBucket: "maps-7bdbb.appspot.com",
                     messagingSenderId: "887386461425"
-                    };
+                };
                 firebase.initializeApp({});
-                
+
             }
 
             firebase.initializeApp(config);
@@ -63,30 +70,28 @@
 
             // Listener for when a click is added.
             locations.on('child_added',
-              function(snapshot) {
+                function(snapshot) {
 
-                console.log("child_added");
+                    console.log("child_added");
 
-                // Get that click from firebase.
-                var newPosition = snapshot.val();
-//                var point = new google.maps.LatLng(newPosition.lat, newPosition.lng);
+                    // Get that click from firebase.
+                    var newPosition = snapshot.val();
+                    //                var point = new google.maps.LatLng(newPosition.lat, newPosition.lng);
 
-                new google.maps.Marker
-                  position: newPosition,
-                  map: map
-                });
-
-                // Add the point to  the heatmap.
-//                heatmap.getData().push(point);
-
-              }
+                    new google.maps.Marker
+                    position: newPosition,
+                        map: map
+                }
             );
-            
-                
-          }
-        
+
+            // Add the point to  the heatmap.
+            //                heatmap.getData().push(point);
+
+        }
+
     </script>
-      
-    
-  </body>
+
+
+</body>
+
 </html>
