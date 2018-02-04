@@ -83,9 +83,10 @@
                         var newPosition = snapshot.val();
                         //                var point = new google.maps.LatLng(newPosition.lat, newPosition.lng);
 
-                        new google.maps.Marker
-                        position: newPosition,
+                        var marker = new google.maps.Marker({
+                            position: newPosition,
                             map: map
+                        });
                     }
                 );
 
