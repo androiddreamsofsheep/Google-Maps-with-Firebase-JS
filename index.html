@@ -60,6 +60,11 @@
 
         }
 
+        var setMessage = function(data) {
+            var val = data.val();
+            console.log("val is " + val)
+        }.bind(this);
+
         function callFirebase() {
             var ref = firebase.database().ref();
 
@@ -68,22 +73,27 @@
             // Reference to the clicks in Firebase.
             var locations = ref.child('location');
 
+
             // Listener for when a click is added.
-            locations.on('child_added',
-                function(snapshot) {
-
-                    console.log("child_added");
-
-                    // Get that click from firebase.
-                    var newPosition = snapshot.val();
-
-                    var marker = new google.maps.Marker({
-                        position: newPosition,
-                        map: map
-                    });
-                }
-            );
+            locations.on('child_added', setMessage);
         }
+
+
+
+        /*
+        function(snapshot) {
+
+                console.log("child_added");
+
+                // Get that click from firebase.
+                var newPosition = snapshot.val();
+
+                var marker = new google.maps.Marker({
+                    position: newPosition,
+                    map: map
+                });
+            }
+        */
 
     </script>
 
