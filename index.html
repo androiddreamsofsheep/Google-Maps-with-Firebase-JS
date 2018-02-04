@@ -39,9 +39,10 @@
         }
 
         // Initialize Firebase
-        $(document).load(
-            initMap(); initFirebase();
-        );
+        $(document).load(function() {
+            initMap();
+            initFirebase();
+        });
 
         function initFirebase() {
             if (!firebase.apps.length) {
